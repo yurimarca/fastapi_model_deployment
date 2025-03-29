@@ -38,7 +38,13 @@ def setup_logging():
 logger = setup_logging()
 
 # Import and expose the main functions
-from .model import train_model, inference, compute_model_metrics
+from .model import (
+    train_model,
+    inference,
+    compute_model_metrics,
+    compute_slice_metrics,
+    save_slice_metrics
+)
 from .data import process_data
 
 __all__ = [
@@ -48,5 +54,7 @@ __all__ = [
     'train_model',
     'inference',
     'compute_model_metrics',
+    'compute_slice_metrics',
+    'save_slice_metrics',
     'process_data'
 ]

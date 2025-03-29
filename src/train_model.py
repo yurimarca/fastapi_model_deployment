@@ -16,7 +16,9 @@ from ml import (
     train_model,
     inference,
     compute_model_metrics,
-    process_data
+    process_data,
+    compute_slice_metrics,
+    save_slice_metrics
 )
 
 # Start logging
@@ -96,6 +98,23 @@ for model_type in model_types:
     model_path = os.path.join(model_dir, f"{model_type}.joblib")
     joblib.dump(model, model_path)
     logger.info(f"Model saved to {model_path}")
+    
+    # Compute and save slice metrics for a given feature
+    feature = "education"
+    logger.info(f"Computing slice metrics for {model_type} model")
+    slice_metrics = compute_slice_metrics(
+        model=model,
+        data=test,
+        feature=feature,
+        categorical_features=cat_features,
+        encoder=encoder,
+        lb=lb
+    )
+    
+    # Save slice metrics to file
+    slice_output_path = os.path.join(model_dir, f"slice_output_{model_type}.txt")
+    save_slice_metrics(slice_metrics, feature, slice_output_path)
+    logger.info(f"Slice metrics saved to {slice_output_path}")
 
 # Save the encoder and label binarizer
 logger.info("Saving preprocessing components")

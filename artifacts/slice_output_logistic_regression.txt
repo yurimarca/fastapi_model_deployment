@@ -1,0 +1,99 @@
+Performance metrics for slices of feature: education
+==================================================
+
+Slice:  Some-college
+Sample size: 1485
+Precision: 0.6132
+Recall: 0.2347
+F-beta: 0.3394
+------------------------------
+Slice:  HS-grad
+Sample size: 2085
+Precision: 0.6033
+Recall: 0.2116
+F-beta: 0.3133
+------------------------------
+Slice:  Bachelors
+Sample size: 1053
+Precision: 0.8199
+Recall: 0.2933
+F-beta: 0.4321
+------------------------------
+Slice:  Masters
+Sample size: 369
+Precision: 0.8857
+Recall: 0.2995
+F-beta: 0.4477
+------------------------------
+Slice:  Assoc-acdm
+Sample size: 198
+Precision: 0.9286
+Recall: 0.2766
+F-beta: 0.4262
+------------------------------
+Slice:  7th-8th
+Sample size: 141
+Precision: 0.2500
+Recall: 0.1667
+F-beta: 0.2000
+------------------------------
+Slice:  11th
+Sample size: 225
+Precision: 0.7000
+Recall: 0.6364
+F-beta: 0.6667
+------------------------------
+Slice:  Assoc-voc
+Sample size: 273
+Precision: 0.5357
+Recall: 0.2381
+F-beta: 0.3297
+------------------------------
+Slice:  Prof-school
+Sample size: 116
+Precision: 0.9355
+Recall: 0.3452
+F-beta: 0.5043
+------------------------------
+Slice:  9th
+Sample size: 115
+Precision: 0.5000
+Recall: 0.3333
+F-beta: 0.4000
+------------------------------
+Slice:  5th-6th
+Sample size: 62
+Precision: 0.5000
+Recall: 0.5000
+F-beta: 0.5000
+------------------------------
+Slice:  10th
+Sample size: 183
+Precision: 0.5714
+Recall: 0.3333
+F-beta: 0.4211
+------------------------------
+Slice:  Doctorate
+Sample size: 77
+Precision: 1.0000
+Recall: 0.3333
+F-beta: 0.5000
+------------------------------
+Slice:  12th
+Sample size: 98
+Precision: 0.2500
+Recall: 0.2000
+F-beta: 0.2222
+------------------------------
+Slice:  1st-4th
+Sample size: 23
+Precision: 0.0000
+Recall: 1.0000
+F-beta: 0.0000
+------------------------------
+Slice:  Preschool
+Sample size: 10
+Precision: 1.0000
+Recall: 1.0000
+F-beta: 1.0000
+------------------------------
