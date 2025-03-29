@@ -33,6 +33,7 @@ jobs:
           pytest tests
 
   deploy:
+    needs: ci
     runs-on: ubuntu-latest
 
     steps:
