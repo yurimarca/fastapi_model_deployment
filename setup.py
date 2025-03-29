@@ -1,8 +1,16 @@
-import setuptools
+from setuptools import setup, find_packages
 
-setuptools.setup(
-    name="starter",
-    version="0.0.0",
-    description="Starter code.",
-    author="Student",
+setup(
+    name="fastapi_model_deployment",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[
+        "pandas",
+        "numpy",
+        "scikit-learn",
+        "xgboost",
+        "pytest",
+        "fastapi",
+        "uvicorn",
+    ],
 )
