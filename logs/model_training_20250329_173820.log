@@ -1,0 +1,35 @@
+2025-03-29 17:38:21,008 - ml - INFO - Starting model training process
+2025-03-29 17:38:21,008 - ml - INFO - Loading data from /home/yurimarca/Code/fastapi_model_deployment/data/census.csv
+2025-03-29 17:38:21,039 - ml - INFO - Loaded 32561 rows of data
+2025-03-29 17:38:21,039 - ml - INFO - Columns in dataset: age, workclass, fnlgt, education, education-num, marital-status, occupation, relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country, salary
+2025-03-29 17:38:21,039 - ml - INFO - Splitting data with random seed 42
+2025-03-29 17:38:21,042 - ml - INFO - Training set size: 26048, Test set size: 6513
+2025-03-29 17:38:21,042 - ml - INFO - Processing training data
+2025-03-29 17:38:21,116 - ml - INFO - Processed training data shape: (26048, 108)
+2025-03-29 17:38:21,116 - ml - INFO - Processing test data
+2025-03-29 17:38:21,128 - ml - INFO - Processed test data shape: (6513, 108)
+2025-03-29 17:38:21,128 - ml - INFO - *** Starting training process for random_forest ***
+2025-03-29 17:38:21,129 - ml - INFO - Training random_forest model with random seed 42
+2025-03-29 17:38:22,969 - ml - INFO - Successfully trained random_forest model
+2025-03-29 17:38:22,969 - ml - INFO - Running model inference
+2025-03-29 17:38:23,055 - ml - INFO - Generated 6513 predictions
+2025-03-29 17:38:23,060 - ml - INFO - Model metrics - Precision: 0.7419, Recall: 0.6384, F-beta: 0.6863
+2025-03-29 17:38:23,146 - ml - INFO - Model saved to /home/yurimarca/Code/fastapi_model_deployment/artifacts/random_forest.joblib
+2025-03-29 17:38:23,147 - ml - INFO - *** Starting training process for logistic_regression ***
+2025-03-29 17:38:23,147 - ml - INFO - Training logistic_regression model with random seed 42
+2025-03-29 17:38:23,230 - ml - INFO - Successfully trained logistic_regression model
+2025-03-29 17:38:23,231 - ml - INFO - Running model inference
+2025-03-29 17:38:23,231 - ml - INFO - Generated 6513 predictions
+2025-03-29 17:38:23,239 - ml - INFO - Model metrics - Precision: 0.7285, Recall: 0.2699, F-beta: 0.3939
+2025-03-29 17:38:23,241 - ml - INFO - Model saved to /home/yurimarca/Code/fastapi_model_deployment/artifacts/logistic_regression.joblib
+2025-03-29 17:38:23,241 - ml - INFO - *** Starting training process for xgboost ***
+2025-03-29 17:38:23,241 - ml - INFO - Training xgboost model with random seed 42
+2025-03-29 17:38:23,443 - ml - INFO - Successfully trained xgboost model
+2025-03-29 17:38:23,443 - ml - INFO - Running model inference
+2025-03-29 17:38:23,454 - ml - INFO - Generated 6513 predictions
+2025-03-29 17:38:23,461 - ml - INFO - Model metrics - Precision: 0.7774, Recall: 0.6690, F-beta: 0.7191
+2025-03-29 17:38:23,463 - ml - INFO - Model saved to /home/yurimarca/Code/fastapi_model_deployment/artifacts/xgboost.joblib
+2025-03-29 17:38:23,463 - ml - INFO - Saving preprocessing components
+2025-03-29 17:38:23,465 - ml - INFO - Encoder saved to /home/yurimarca/Code/fastapi_model_deployment/artifacts/encoder.joblib
+2025-03-29 17:38:23,465 - ml - INFO - Label binarizer saved to /home/yurimarca/Code/fastapi_model_deployment/artifacts/lb.joblib
+2025-03-29 17:38:23,465 - ml - INFO - Model training process completed successfully

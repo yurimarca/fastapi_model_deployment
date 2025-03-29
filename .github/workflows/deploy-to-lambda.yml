@@ -56,7 +56,7 @@ jobs:
           ECR_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}
 
           # Build the image with the correct Dockerfile path
-          docker build -t $ECR_URI:$IMAGE_TAG -f container/Dockerfile container/
+          docker build -t $ECR_URI:$IMAGE_TAG -f api-container/Dockerfile api-container/
           docker tag $ECR_URI:$IMAGE_TAG $ECR_URI:latest
 
           # Push both tagged images to ECR

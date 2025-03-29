@@ -1,6 +1,8 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import logging
 
+logger = logging.getLogger(__name__)
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
@@ -43,12 +45,24 @@ def process_data(
         Trained LabelBinarizer if training is True, otherwise returns the binarizer
         passed in.
     """
-
+    # Clean column names
+    X.columns = X.columns.str.strip()
+    
+    # Verify label exists
     if label is not None:
+        if label not in X.columns:
+            logger.error(f"Label column '{label}' not found in data. Available columns: {', '.join(X.columns)}")
+            raise KeyError(f"Label column '{label}' not found in data")
         y = X[label]
         X = X.drop([label], axis=1)
     else:
         y = np.array([])
+
+    # Verify categorical features exist
+    missing_cat_features = [feat for feat in categorical_features if feat not in X.columns]
+    if missing_cat_features:
+        logger.error(f"Categorical features not found in data: {', '.join(missing_cat_features)}")
+        raise KeyError(f"Categorical features not found in data: {', '.join(missing_cat_features)}")
 
     X_categorical = X[categorical_features].values
     X_continuous = X.drop(*[categorical_features], axis=1)
