@@ -33,7 +33,7 @@ jobs:
           pytest tests --disable-warnings -v
 
   deploy:
-    # needs: ci
+    needs: ci
     runs-on: ubuntu-latest
 
     steps:
@@ -50,15 +50,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      # - name: Train models
-      #   run: |
-      #     python src/train_model.py
+      - name: Train models
+        run: |
+          python src/train_model.py
       
-      # - name: Copy artifacts for Docker build
-      #   run: |
-      #     cd api-container
-      #     chmod +x copy_artifacts.sh
-      #     ./copy_artifacts.sh
+      - name: Copy artifacts for Docker build
+        run: |
+          cd api-container
+          chmod +x copy_artifacts.sh
+          ./copy_artifacts.sh
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
