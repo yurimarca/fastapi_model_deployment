@@ -7,7 +7,7 @@ ENV PYTHONPATH="${LAMBDA_TASK_ROOT}:${PYTHONPATH}"
 RUN mkdir -p ${LAMBDA_TASK_ROOT}/artifacts
 
 # Copy function code
-COPY ./app ${LAMBDA_TASK_ROOT}/app
+COPY ./app ${LAMBDA_TASK_ROOT}
 COPY ./src ${LAMBDA_TASK_ROOT}/src
 
 # Copy artifacts
@@ -20,4 +20,4 @@ COPY requirements.txt .
 RUN pip3 install --target "${LAMBDA_TASK_ROOT}" --upgrade --no-cache-dir -r requirements.txt
 
 # AWS Lambda requires a handler function
-CMD ["app.main.handler"]
+CMD ["main.handler"]
