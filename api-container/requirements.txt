@@ -1,5 +1,8 @@
 fastapi
 pydantic
-numpy
 mangum
-
+pandas
+numpy
+joblib
+scikit-learn
+xgboost
