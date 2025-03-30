@@ -8,6 +8,8 @@ from pathlib import Path
 import pandas as pd
 import logging
 
+from src.ml.data import process_data
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -95,46 +97,53 @@ async def read_root():
 async def predict(data: CensusData):
     """
     Endpoint for making predictions using the trained model.
-    
-    Args:
-        data (CensusData): Input data for prediction
-        
-    Returns:
-        dict: Prediction result and probability
     """
     if model is None or encoder is None or lb is None:
         raise HTTPException(
             status_code=500,
             detail="Model or preprocessing components not loaded"
         )
-    
+
     try:
-        # Convert input data to DataFrame
         input_data = data.dict(by_alias=True)
         input_df = pd.DataFrame([input_data])
-        
-        # Preprocess the input data
-        X = encoder.transform(input_df)
-        
-        # Make prediction
-        prediction = model.predict(X)
-        probability = model.predict_proba(X)
-        
-        # Convert prediction back to original label
+
+        # Same categorical feature list as training
+        categorical_cols = [
+            "workclass",
+            "education",
+            "marital-status",
+            "occupation",
+            "relationship",
+            "race",
+            "sex",
+            "native-country",
+        ]
+
+        # Use your own process_data for preprocessing
+        X_processed, _, _, _ = process_data(
+            input_df,
+            categorical_features=categorical_cols,
+            training=False,
+            encoder=encoder,
+            lb=lb
+        )
+
+        # Predict
+        prediction = model.predict(X_processed)
+        probability = model.predict_proba(X_processed)
+
         prediction_label = lb.inverse_transform(prediction)[0]
-        
+
         return {
             "prediction": prediction_label,
             "probability": float(probability[0][1]),
             "status": "success"
         }
-        
+
     except Exception as e:
         logger.error(f"Error making prediction: {str(e)}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error making prediction: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error making prediction: {str(e)}")
 
 # AWS Lambda handler
 handler = Mangum(app)
