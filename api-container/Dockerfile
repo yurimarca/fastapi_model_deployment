@@ -10,4 +10,4 @@ COPY requirements.txt .
 RUN pip3 install --target "${LAMBDA_TASK_ROOT}" --upgrade --no-cache-dir -r requirements.txt
 
 # AWS Lambda requires a handler function
-CMD ["main.handler"]
+CMD ["app.main.handler"]
