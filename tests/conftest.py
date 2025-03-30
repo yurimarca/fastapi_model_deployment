@@ -2,42 +2,64 @@
 Shared test fixtures and configurations for the project.
 """
 
-import pytest
+import os
+import sys
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder, LabelBinarizer
+import pytest
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import LabelBinarizer
+
+# Add the project root directory to the Python path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
 
 @pytest.fixture
 def sample_data():
     """Create sample data for testing."""
-    # Create a small sample dataset
-    data = {
-        'age': [25, 30, 35, 40],
-        'workclass': ['Private', 'Public', 'Private', 'Public'],
-        'education': ['Bachelors', 'Masters', 'Bachelors', 'Masters'],
-        'marital-status': ['Single', 'Married', 'Single', 'Married'],
-        'occupation': ['Tech', 'Admin', 'Tech', 'Admin'],
-        'relationship': ['Not-in-family', 'Husband', 'Not-in-family', 'Husband'],
-        'race': ['White', 'Black', 'White', 'Black'],
-        'sex': ['Male', 'Female', 'Male', 'Female'],
-        'native-country': ['US', 'UK', 'US', 'UK'],
-        'salary': ['<=50K', '>50K', '<=50K', '>50K']
-    }
-    return pd.DataFrame(data)
+    return pd.DataFrame({
+        'age': [25, 40],
+        'workclass': ['Private', 'Public'],
+        'fnlgt': [226802, 121772],
+        'education': ['Bachelors', 'Masters'],
+        'education-num': [13, 14],
+        'marital-status': ['Never-married', 'Married'],
+        'occupation': ['Tech-support', 'Admin'],
+        'relationship': ['Not-in-family', 'Husband'],
+        'race': ['White', 'Black'],
+        'sex': ['Male', 'Female'],
+        'capital-gain': [0, 0],
+        'capital-loss': [0, 0],
+        'hours-per-week': [40, 40],
+        'native-country': ['United-States', 'United-States'],
+        'salary': ['<=50K', '>50K']
+    })
 
 @pytest.fixture
 def categorical_features():
     """Define categorical features for testing."""
     return [
-        "workclass",
-        "education",
-        "marital-status",
-        "occupation",
-        "relationship",
-        "race",
-        "sex",
-        "native-country",
+        'workclass', 'education', 'marital-status', 'occupation',
+        'relationship', 'race', 'sex', 'native-country'
     ]
+
+@pytest.fixture
+def numerical_features():
+    """Define numerical features for testing."""
+    return [
+        'age', 'fnlgt', 'education-num', 'capital-gain',
+        'capital-loss', 'hours-per-week'
+    ]
+
+@pytest.fixture
+def encoder():
+    """Create a fitted OneHotEncoder for testing."""
+    return OneHotEncoder(sparse=False, handle_unknown='ignore')
+
+@pytest.fixture
+def lb():
+    """Create a fitted LabelBinarizer for testing."""
+    return LabelBinarizer()
 
 @pytest.fixture
 def processed_data(sample_data, categorical_features):
@@ -49,13 +71,7 @@ def processed_data(sample_data, categorical_features):
         label="salary",
         training=True
     )
-    return {
-        'X': X,
-        'y': y,
-        'encoder': encoder,
-        'lb': lb,
-        'categorical_features': categorical_features
-    }
+    return X, y, encoder, lb
 
 @pytest.fixture
 def trained_models(processed_data):
@@ -66,8 +82,8 @@ def trained_models(processed_data):
     
     for model_type in model_types:
         models[model_type] = train_model(
-            processed_data['X'],
-            processed_data['y'],
+            processed_data[0],
+            processed_data[1],
             model_type=model_type
         )
     
@@ -80,6 +96,6 @@ def model_predictions(processed_data, trained_models):
     predictions = {}
     
     for model_type, model in trained_models.items():
-        predictions[model_type] = inference(model, processed_data['X'])
+        predictions[model_type] = inference(model, processed_data[0])
     
     return predictions 

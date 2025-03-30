@@ -12,5 +12,6 @@ setup(
         "pytest",
         "fastapi",
         "uvicorn",
+        "mangum",
     ],
 )
