@@ -19,7 +19,8 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     title="Census Income Prediction API",
     description="API for predicting income based on census data",
-    version="1.0.0"
+    version="1.0.0",
+    root_path="/"
 )
 
 # Define the Pydantic model for input data
@@ -221,12 +222,6 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
-
-
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    print(f"Incoming: {request.method} {request.url}")
-    return await call_next(request)
 
 
 # AWS Lambda handler
