@@ -85,18 +85,18 @@ The model card follows the provided template and is written in complete sentence
 - **API Documentation Screenshot:**  
   A screenshot of the FastAPI docs showing the example is provided as [`example.png`](screenshots/example.png).
 
-## API Testing
-
-- **API Unit Tests:**  
-  Unit tests for the API are included in the [tests](tests/) directory:
-  - A test for the GET endpoint checks both the status code and the content of the greeting.
-  - Separate test cases validate different possible outcomes of model inference from the POST endpoint.
-
 ## API Deployment
 
-- **Cloud Deployment:**  
-  The application is deployed to a Cloud Application Platform with continuous delivery enabled and uses GitHub repository integrations.
-  
+- **Cloud Deployment with AWS:**  
+  The application is containerized and deployed to AWS using the following services:
+  - **Amazon Elastic Container Registry (ECR):** The Docker image is built and pushed to a private ECR repository.
+  - **AWS Lambda:** The containerized FastAPI application is deployed as a Lambda function. This allows the API to run in a serverless environment.
+
+  The deployment process is automated using GitHub Actions. The workflow:
+  1. Builds the Docker image using the `api-container/Dockerfile`.
+  2. Pushes the image to the ECR repository.
+  3. Updates the Lambda function to use the latest image from ECR.
+
 - **Deployment Screenshots:**  
   - [`continuous_deployment.png`](screenshots/continuous_deployment.png): Shows that continuous deployment is enabled.
   - [`live_get.png`](screenshots/live_get.png): A screenshot of the browser displaying the GET endpoint response.
