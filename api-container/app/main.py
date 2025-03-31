@@ -19,11 +19,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     title="Census Income Prediction API",
     description="API for predicting income based on census data",
-    version="1.0.0",
-    root_path="/prod",
-    openapi_url="/prod/openapi.json",
-    docs_url="/prod/docs",
-    redoc_url="/prod/redoc" 
+    version="1.0.0"
 )
 
 # Define the Pydantic model for input data
