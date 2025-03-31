@@ -2,6 +2,8 @@
 
 This project is designed to deploy a machine learning model as a REST API on a cloud application platform using FastAPI. The repository follows a structured approach that meets the requirements outlined in the project rubric.
 
+**Repository URL: (https://github.com/yurimarca/fastapi_model_deployment/)[https://github.com/yurimarca/fastapi_model_deployment/]**
+
 ## Repository Structure
 
 The repository is organized as follows:
