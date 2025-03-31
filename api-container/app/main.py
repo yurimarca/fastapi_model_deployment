@@ -20,7 +20,10 @@ app = FastAPI(
     title="Census Income Prediction API",
     description="API for predicting income based on census data",
     version="1.0.0",
-    root_path="/"
+    root_path="/prod",
+    openapi_url="/prod/openapi.json",
+    docs_url="/prod/docs",
+    redoc_url="/prod/redoc" 
 )
 
 # Define the Pydantic model for input data
