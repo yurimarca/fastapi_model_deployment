@@ -103,4 +103,4 @@ The model card follows the provided template and is written in complete sentence
   - [`live_post.png`](screenshots/live_post.png): A screenshot of the result and status code from the API POST request.
 
 - **API Query Script:**  
-  A script that uses the `requests` module to POST data to the API and display both the model inference result and the status code is included in the repository. This verifies that the API is live and functioning as expected.
+  A Python script is included in the repository to query the API and verify its functionality. The script sends a POST request to the API and displays both the model inference result and the status code. You can find the script at [`query_api.py`](query_api.py).  
