@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi import Request
 from pydantic import BaseModel, Field
 from typing import Optional
 from mangum import Mangum
@@ -220,6 +221,12 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
+
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    print(f"Incoming: {request.method} {request.url}")
+    return await call_next(request)
 
 
 # AWS Lambda handler
